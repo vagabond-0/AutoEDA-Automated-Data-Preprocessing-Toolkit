@@ -1,0 +1,65 @@
+/* components/About.css */
+.about-container {
+  background-color: #f9f9f9; /* Light background */
+  padding: 20px; /* Add padding */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  max-width: 800px; /* Max width for readability */
+  margin: 20px auto; /* Centering the container */
+}
+
+.about-container h2 {
+  color: #2c3e50; /* Dark blue color for heading */
+  text-align: center; /* Centering the heading */
+  font-size: 1.8em; /* Larger font size */
+}
+
+.about-container p {
+  color: #34495e; /* Darker gray for text */
+  line-height: 1.6; /* Improved line spacing */
+  font-size: 1.1em; /* Slightly larger font size */
+  text-align: justify; /* Justify the text */
+}
+
+/* components/FileUpload.css */
+.file-upload-container {
+  background-color: #f0f8ff; /* Light background color */
+  padding: 20px; /* Add padding */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  max-width: 400px; /* Max width for readability */
+  margin: 20px auto; /* Centering the container */
+  text-align: center; /* Centering text */
+}
+
+.file-upload-container h2 {
+  color: #2980b9; /* Dark blue color for heading */
+  margin-bottom: 10px; /* Space below heading */
+}
+
+.file-upload-container p {
+  color: #34495e; /* Darker gray for text */
+  margin-bottom: 15px; /* Space below paragraph */
+}
+
+.file-input {
+  padding: 10px; /* Padding for input */
+  border: 1px solid #2980b9; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  width: 100%; /* Full width */
+  margin-bottom: 10px; /* Space below input */
+}
+
+.upload-button {
+  background-color: #2980b9; /* Button color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding for button */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.upload-button:hover {
+  background-color: #1a5f8a; /* Darker shade on hover */
+}
