@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 import pandas as pd
-
+from flask_cors import CORS
+import chardet
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def home():
@@ -11,12 +13,18 @@ def home():
 def upload_file():
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
-    
     file = request.files['file']
-    # Perform processing on the uploaded file here
-    # For example, read the CSV into a DataFrame
+    filename = file.filename
+    if not filename.lower().endswith(".csv"):
+        return jsonify({'error': "Only CSV files can be uploaded"}), 400
+    raw_data = file.read()
+    result = chardet.detect(raw_data)
+    encoding = result['encoding']
+    
+    file.seek(0)
+
     try:
-        df = pd.read_csv(file)
+        df = pd.read_csv(file, encoding=encoding)
         return jsonify({'message': 'File processed successfully!', 'data': df.to_dict()}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
