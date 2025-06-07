@@ -16,16 +16,16 @@ def upload_file():
     file = request.files['file']
     filename = file.filename
     if not filename.lower().endswith(".csv"):
-        return jsonify({'error': "Only CSV files can be uploaded"}), 400
+        return jsonify({'status':"error",'error': "Only CSV files can be uploaded"}), 400
     raw_data = file.read()
     result = chardet.detect(raw_data)
     encoding = result['encoding']
-    
+
     file.seek(0)
 
     try:
         df = pd.read_csv(file, encoding=encoding)
-        return jsonify({'message': 'File processed successfully!', 'data': df.to_dict()}), 200
+        return jsonify({ "status": "success", "filename": filename,'message': 'File processed successfully!', 'data': df.to_dict()}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
