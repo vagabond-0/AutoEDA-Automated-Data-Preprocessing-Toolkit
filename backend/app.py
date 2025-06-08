@@ -29,7 +29,7 @@ def upload_file():
     save_path = f"./uploaded_files/{filename}"
     file.seek(0)
     file.save(save_path)
-    
+    file.seek(0)
 
     try:
         df = pd.read_csv(file, encoding=encoding)
