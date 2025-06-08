@@ -21,7 +21,6 @@ const AuthForm = ({ isLogin, toggleForm }) => {
     try {
       console.log(`${isLogin ? "Logging in" : "Signing up"}`, data);
       // API CALL TO AUTHENTICATION ENDPOINT
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
       navigate('/dashboard');
     } finally {
       setIsSubmitting(false);
@@ -146,7 +145,6 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen flex flex-col-reverse md:flex-row items-stretch bg-background">
-      {/* Form Section - Comes first on mobile */}
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
         <AnimatePresence mode="wait">
           <motion.div
@@ -178,7 +176,6 @@ export default function AuthPage() {
         </AnimatePresence>
       </div>
 
-      {/* Image Section - Comes second on mobile */}
       <div className="relative w-full md:w-1/2 h-48 sm:h-64 md:h-auto">
         <AnimatePresence mode="wait">
           <motion.div
