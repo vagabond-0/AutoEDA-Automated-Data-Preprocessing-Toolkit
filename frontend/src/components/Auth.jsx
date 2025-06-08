@@ -196,7 +196,7 @@ export default function AuthPage() {
                 transition={{ delay: 0.3 }}
                 className="text-2xl md:text-4xl font-bold mb-2"
               >
-                {isLogin ? "Discover amazing content" : "Join our community"}
+                {!isLogin ? "Discover amazing content" : "Join our community"}
               </motion.h2>
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
@@ -204,7 +204,7 @@ export default function AuthPage() {
                 transition={{ delay: 0.4 }}
                 className="text-sm md:text-base max-w-md"
               >
-                {isLogin ? "Sign in to access your personalized dashboard" : "Create an account to unlock all features"}
+                {!isLogin ? "Sign in to access your personalized dashboard" : "Create an account to unlock all features"}
               </motion.p>
             </div>
           </motion.div>

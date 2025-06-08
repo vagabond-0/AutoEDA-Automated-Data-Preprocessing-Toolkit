@@ -11,6 +11,7 @@ const App = () => {
        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     
     <Routes>
+      <Route path='*' element={<Home/>}></Route>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/auth' element={<AuthPage/>}></Route>
 <Route path='/dashboard' element={<Dashboard/>}></Route>
