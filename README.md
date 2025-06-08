@@ -25,7 +25,7 @@ Contributors can assist in the following areas:
 4. **Dockerization**: Dockerize the application to streamline deployment and ensure consistent environments.
 
 ### Workflow
-![alt text](<Screenshot 2024-10-01 152746.png>)
+![alt text](<.\assets\Screenshot 2024-10-01 152746.png>)
 
 ## Requirements
 - React.JS + Vite (for frontend)
