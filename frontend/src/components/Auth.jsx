@@ -20,7 +20,8 @@ const AuthForm = ({ isLogin, toggleForm }) => {
     setIsSubmitting(true);
     try {
       console.log(`${isLogin ? "Logging in" : "Signing up"}`, data);
-                           //API CALL TO AUTHENTICATION ENDPOINT
+      // API CALL TO AUTHENTICATION ENDPOINT
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
       navigate('/dashboard');
     } finally {
       setIsSubmitting(false);
@@ -28,7 +29,7 @@ const AuthForm = ({ isLogin, toggleForm }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
       {!isLogin && (
         <div>
           <Input 
@@ -40,9 +41,10 @@ const AuthForm = ({ isLogin, toggleForm }) => {
                 message: "Name must be at least 2 characters"
               }
             })} 
+            className="py-5 sm:py-6 text-sm sm:text-base"
           />
           {errors.name && (
-            <p className="text-sm text-red-500 flex items-center gap-1 mt-1">
+            <p className="text-xs sm:text-sm text-red-500 flex items-center gap-1 mt-1">
               {errors.name.message}
             </p>
           )}
@@ -59,10 +61,11 @@ const AuthForm = ({ isLogin, toggleForm }) => {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
               message: "Invalid email address"
             }
-          })} 
+          })}
+          className="py-5 sm:py-6 text-sm sm:text-base"
         />
         {errors.email && (
-          <p className="text-sm text-red-500 flex items-center gap-1 mt-1">
+          <p className="text-xs sm:text-sm text-red-500 flex items-center gap-1 mt-1">
             {errors.email.message}
           </p>
         )}
@@ -78,10 +81,11 @@ const AuthForm = ({ isLogin, toggleForm }) => {
               value: 8,
               message: "Password must be at least 8 characters"
             }
-          })} 
+          })}
+          className="py-5 sm:py-6 text-sm sm:text-base"
         />
         {errors.password && (
-          <p className="text-sm text-red-500 flex items-center gap-1 mt-1">
+          <p className="text-xs sm:text-sm text-red-500 flex items-center gap-1 mt-1">
             {errors.password.message}
           </p>
         )}
@@ -89,7 +93,7 @@ const AuthForm = ({ isLogin, toggleForm }) => {
 
       <Button 
         type="submit" 
-        className="w-full"
+        className="w-full py-5 sm:py-6 text-sm sm:text-base"
         disabled={isSubmitting}
       >
         {isSubmitting ? (
@@ -97,29 +101,29 @@ const AuthForm = ({ isLogin, toggleForm }) => {
             <motion.span
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="inline-block h-4 w-4 border-2 border-white border-t-transparent rounded-full mr-2"
+              className="inline-block h-3 w-3 sm:h-4 sm:w-4 border-2 border-white border-t-transparent rounded-full mr-2"
             />
             {isLogin ? "Logging in..." : "Signing up..."}
           </span>
         ) : isLogin ? "Login" : "Sign Up"}
       </Button>
 
-      <div className="relative my-6">
+      <div className="relative my-4 sm:my-6">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-gray-300/20" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
+          <span className="bg-background px-2 text-muted-foreground text-xs sm:text-sm">
             Or continue with
           </span>
         </div>
       </div>
 
-      <Button variant="outline" className="w-full" type="button">
+      <Button variant="outline" className="w-full py-5 sm:py-6 text-sm sm:text-base" type="button">
         Google
       </Button>
 
-      <p className="text-center text-sm text-muted-foreground mt-4">
+      <p className="text-center text-xs sm:text-sm text-muted-foreground mt-3 sm:mt-4">
         {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
         <button
           type="button"
@@ -141,28 +145,29 @@ export default function AuthPage() {
   const signupImg = "https://plus.unsplash.com/premium_photo-1682795706814-3e26c44105fd?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   return (
-    <div className="min-h-screen flex flex-col-reverse md:flex-row items-stretch">
-      <div className="flex-1 flex items-center justify-center p-4 md:p-8 bg-background">
+    <div className="min-h-screen flex flex-col-reverse md:flex-row items-stretch bg-background">
+      {/* Form Section - Comes first on mobile */}
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={isLogin ? "login" : "signup"}
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
+            exit={{ opacity: 0, x: -30 }}
             transition={{ duration: 0.3 }}
             className="w-full max-w-md"
           >
             <Card className="border-0 shadow-none md:border md:shadow-sm">
-              <CardContent className="p-6 md:p-8">
+              <CardContent className="p-4 sm:p-6 md:p-8">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <h1 className="text-2xl font-bold text-center mb-1">
+                  <h1 className="text-xl sm:text-2xl font-bold text-center mb-1">
                     {isLogin ? "Welcome back" : "Create an account"}
                   </h1>
-                  <p className="text-sm text-muted-foreground text-center mb-6">
+                  <p className="text-xs sm:text-sm text-muted-foreground text-center mb-4 sm:mb-6">
                     {isLogin ? "Enter your credentials to sign in" : "Enter your details to get started"}
                   </p>
                   <AuthForm isLogin={isLogin} toggleForm={toggleForm} />
@@ -173,7 +178,8 @@ export default function AuthPage() {
         </AnimatePresence>
       </div>
 
-      <div className="relative w-full md:w-1/2 h-64 md:h-auto">
+      {/* Image Section - Comes second on mobile */}
+      <div className="relative w-full md:w-1/2 h-48 sm:h-64 md:h-auto">
         <AnimatePresence mode="wait">
           <motion.div
             key={isLogin ? "loginImg" : "signupImg"}
@@ -185,26 +191,26 @@ export default function AuthPage() {
           >
             <img
               src={isLogin ? loginImg : signupImg}
-              alt=""
+              alt="Auth background"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/30 md:bg-gradient-to-r md:from-black/80 md:to-black/30" />
-            <div className="absolute bottom-8 left-8 text-white">
+            <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 text-white">
               <motion.h2 
-                initial={{ y: 20, opacity: 0 }}
+                initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-2xl md:text-4xl font-bold mb-2"
+                className="text-lg sm:text-2xl md:text-4xl font-bold mb-1 sm:mb-2"
               >
-                {!isLogin ? "Discover amazing content" : "Join our community"}
+                {isLogin ? "Join our community" : "Discover amazing content"}
               </motion.h2>
               <motion.p
-                initial={{ y: 20, opacity: 0 }}
+                initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="text-sm md:text-base max-w-md"
+                className="text-xs sm:text-sm md:text-base max-w-xs sm:max-w-md"
               >
-                {!isLogin ? "Sign in to access your personalized dashboard" : "Create an account to unlock all features"}
+                {isLogin ? "Create an account to unlock all features" : "Sign in to access your personalized dashboard"}
               </motion.p>
             </div>
           </motion.div>
