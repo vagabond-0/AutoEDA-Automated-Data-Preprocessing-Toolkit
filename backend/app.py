@@ -3,7 +3,13 @@ import pandas as pd
 from flask_cors import CORS
 import chardet
 app = Flask(__name__)
-CORS(app)
+
+ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://auto-eda-automated-data-preprocessing-toolkit.vercel.app"
+]
+
+CORS(app, resources={r"/upload": {"origins": ALLOWED_ORIGINS}}, supports_credentials=True)
 
 @app.route('/')
 def home():
@@ -20,12 +26,14 @@ def upload_file():
     raw_data = file.read()
     result = chardet.detect(raw_data)
     encoding = result['encoding']
-
+    save_path = f"./uploaded_files/{filename}"
     file.seek(0)
+    file.save(save_path)
+    
 
     try:
         df = pd.read_csv(file, encoding=encoding)
-        return jsonify({ "status": "success", "filename": filename,'message': 'File processed successfully!', 'data': df.to_dict()}), 200
+        return jsonify({ "status": "success", "filename": filename,'message': 'File processed successfully!', "preview": df.head(5).to_dict(), "columns": df.columns.tolist(),"shape": df.shape}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
