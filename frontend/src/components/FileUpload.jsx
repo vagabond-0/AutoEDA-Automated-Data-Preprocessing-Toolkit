@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Card,
   CardContent,
@@ -11,6 +11,29 @@ import { Button } from './ui/button';
 import { UploadCloud } from 'lucide-react';
 
 const FileUpload = () => {
+const [selectedFile, setSelectedFile] = useState(null);
+
+ const handleFileChange = (e) => {
+  if (e.target.files && e.target.files.length > 0) {
+    setSelectedFile(e.target.files[0]);
+  }
+};
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!selectedFile) {
+      alert("Please select a file first.");
+      return;
+    }
+
+    console.log("Uploading file:", selectedFile.name);
+    alert(`File "${selectedFile.name}" uploaded successfully!`);
+  };
+
+  const handleCancel = () => {
+    setSelectedFile(null);
+  };
+
   return (
     <div className="w-full px-4 md:px-16 py-8 flex justify-center items-center">
       <Card className="bg-white shadow-lg border border-gray-100 rounded-xl w-full max-w-3xl hover:shadow-xl transition-shadow">
@@ -29,14 +52,16 @@ const FileUpload = () => {
             </div>
           </div>
         </CardHeader>
+
         <CardContent>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="relative">
               <Input
                 type="file"
                 accept=".csv"
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                className="file-input absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 id="file-input"
+                onChange={handleFileChange}
               />
               <label 
                 htmlFor="file-input" 
@@ -47,6 +72,9 @@ const FileUpload = () => {
                   <span className="text-blue-600">Click to upload</span> or drag and drop
                 </p>
                 <p className="text-xs text-gray-500">CSV files only</p>
+                {selectedFile && (
+                  <p className="text-sm text-gray-700 mt-2">Selected: {selectedFile.name}</p>
+                )}
               </label>
             </div>
             
@@ -54,13 +82,14 @@ const FileUpload = () => {
               <Button
                 type="submit"
                 variant="default"
-                className="w-full md:w-auto px-6 py-3"
+                className="upload-button w-full md:w-auto px-6 py-3"
               >
                 Upload File
               </Button>
               <Button
                 type="button"
                 variant="outline"
+                onClick={handleCancel}
                 className="w-full md:w-auto px-6 py-3"
               >
                 Cancel
