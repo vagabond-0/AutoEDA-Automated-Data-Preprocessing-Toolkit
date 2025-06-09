@@ -5,34 +5,48 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
+import { Loader2, Eye, EyeOff } from 'lucide-react';
 
 const AuthForm = ({ isLogin, toggleForm }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const password = watch('password');
+
+  const passwordStrength = () => {
+    if (!password) return 0;
+    let strength = 0;
+    if (password.length >= 8) strength += 1;
+    if (/[A-Z]/.test(password)) strength += 1;
+    if (/[0-9]/.test(password)) strength += 1;
+    if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+    return strength;
+  };
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
       console.log(`${isLogin ? "Logging in" : "Signing up"}`, data);
       // API CALL TO AUTHENTICATION ENDPOINT
-      navigate('/dashboard');
+      navigate('/');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       {!isLogin && (
-        <div>
+        <div className="space-y-1.5">
           <Input 
-            placeholder="Name" 
+            placeholder="Full name" 
             {...register("name", { 
               required: "Name is required",
               minLength: {
@@ -40,19 +54,19 @@ const AuthForm = ({ isLogin, toggleForm }) => {
                 message: "Name must be at least 2 characters"
               }
             })} 
-            className="py-5 sm:py-6 text-sm sm:text-base"
+            className="h-11 text-base"
           />
           {errors.name && (
-            <p className="text-xs sm:text-sm text-red-500 flex items-center gap-1 mt-1">
+            <p className="text-sm text-red-500 mt-1">
               {errors.name.message}
             </p>
           )}
         </div>
       )}
 
-      <div>
+      <div className="space-y-1.5">
         <Input 
-          placeholder="Email" 
+          placeholder="Email address" 
           type="email" 
           {...register("email", { 
             required: "Email is required",
@@ -61,75 +75,108 @@ const AuthForm = ({ isLogin, toggleForm }) => {
               message: "Invalid email address"
             }
           })}
-          className="py-5 sm:py-6 text-sm sm:text-base"
+          className="h-11 text-base"
         />
         {errors.email && (
-          <p className="text-xs sm:text-sm text-red-500 flex items-center gap-1 mt-1">
+          <p className="text-sm text-red-500 mt-1">
             {errors.email.message}
           </p>
         )}
       </div>
 
-      <div>
-        <Input 
-          placeholder="Password" 
-          type="password" 
-          {...register("password", { 
-            required: "Password is required",
-            minLength: {
-              value: 8,
-              message: "Password must be at least 8 characters"
-            }
-          })}
-          className="py-5 sm:py-6 text-sm sm:text-base"
-        />
+      <div className="space-y-1.5">
+        <div className="relative">
+          <Input 
+            placeholder="Password" 
+            type={showPassword ? "text" : "password"} 
+            {...register("password", { 
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters"
+              }
+            })}
+            className="h-11 text-base pr-10"
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        </div>
+        
+        {!isLogin && password && (
+          <div className="flex gap-1 mt-1">
+            {[1, 2, 3, 4].map((i) => (
+              <div 
+                key={i}
+                className={`h-1 flex-1 rounded-sm ${
+                  passwordStrength() >= i 
+                    ? passwordStrength() >= 3 ? 'bg-green-500' : 'bg-yellow-500'
+                    : 'bg-gray-200'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
         {errors.password && (
-          <p className="text-xs sm:text-sm text-red-500 flex items-center gap-1 mt-1">
+          <p className="text-sm text-red-500 mt-1">
             {errors.password.message}
           </p>
         )}
       </div>
 
+      {isLogin && (
+        <div className="flex items-center justify-between text-sm">
+          <label className="flex items-center space-x-2">
+            <input type="checkbox" className="rounded border-gray-300 text-primary focus:ring-primary" />
+            <span>Remember me</span>
+          </label>
+          <button type="button" className="text-primary hover:underline">
+            Forgot password?
+          </button>
+        </div>
+      )}
+
       <Button 
         type="submit" 
-        className="w-full py-5 sm:py-6 text-sm sm:text-base"
+        className="w-full h-11 text-base font-medium"
         disabled={isSubmitting}
       >
         {isSubmitting ? (
-          <span className="flex items-center justify-center">
-            <motion.span
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="inline-block h-3 w-3 sm:h-4 sm:w-4 border-2 border-white border-t-transparent rounded-full mr-2"
-            />
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             {isLogin ? "Logging in..." : "Signing up..."}
-          </span>
-        ) : isLogin ? "Login" : "Sign Up"}
+          </>
+        ) : isLogin ? "Sign in" : "Create account"}
       </Button>
 
-      <div className="relative my-4 sm:my-6">
+      <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300/20" />
+          <div className="w-full border-t border-gray-200" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground text-xs sm:text-sm">
+          <span className="bg-background px-3 text-gray-500 text-sm">
             Or continue with
           </span>
         </div>
       </div>
 
-      <Button variant="outline" className="w-full py-5 sm:py-6 text-sm sm:text-base" type="button">
+     <Button variant="outline" className="w-full py-5 sm:py-6 text-sm sm:text-base" type="button">
         Google
       </Button>
 
-      <p className="text-center text-xs sm:text-sm text-muted-foreground mt-3 sm:mt-4">
+      <p className="text-center text-sm text-gray-600 mt-4">
         {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
         <button
           type="button"
           onClick={toggleForm}
           className="font-medium text-primary hover:underline"
         >
-          {isLogin ? "Sign up" : "Log in"}
+          {isLogin ? "Sign up" : "Sign in"}
         </button>
       </p>
     </form>
@@ -144,8 +191,8 @@ export default function AuthPage() {
   const signupImg = "https://plus.unsplash.com/premium_photo-1682795706814-3e26c44105fd?q=80&w=2012&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   return (
-    <div className="min-h-screen flex flex-col-reverse md:flex-row items-stretch bg-background">
-      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen flex flex-col-reverse md:flex-row items-stretch bg-white">
+      <div className="flex-1 flex items-center justify-center p-6 md:p-12">
         <AnimatePresence mode="wait">
           <motion.div
             key={isLogin ? "login" : "signup"}
@@ -155,28 +202,44 @@ export default function AuthPage() {
             transition={{ duration: 0.3 }}
             className="w-full max-w-md"
           >
-            <Card className="border-0 shadow-none md:border md:shadow-sm">
-              <CardContent className="p-4 sm:p-6 md:p-8">
+            <Card className="border-0 shadow-none md:border md:shadow-sm rounded-xl">
+              <CardContent className="p-8">
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
+                  className="flex flex-col items-center mb-6"
                 >
-                  <h1 className="text-xl sm:text-2xl font-bold text-center mb-1">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                    <svg 
+                      className="w-6 h-6 text-primary" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth="2" 
+                        d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
+                      />
+                    </svg>
+                  </div>
+                  <h1 className="text-2xl font-bold text-center">
                     {isLogin ? "Welcome back" : "Create an account"}
                   </h1>
-                  <p className="text-xs sm:text-sm text-muted-foreground text-center mb-4 sm:mb-6">
+                  <p className="text-sm text-gray-500 text-center mt-2">
                     {isLogin ? "Enter your credentials to sign in" : "Enter your details to get started"}
                   </p>
-                  <AuthForm isLogin={isLogin} toggleForm={toggleForm} />
                 </motion.div>
+                <AuthForm isLogin={isLogin} toggleForm={toggleForm} />
               </CardContent>
             </Card>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      <div className="relative w-full md:w-1/2 h-48 sm:h-64 md:h-auto">
+      <div className="relative w-full md:w-1/2 h-64 md:h-auto">
         <AnimatePresence mode="wait">
           <motion.div
             key={isLogin ? "loginImg" : "signupImg"}
@@ -190,14 +253,15 @@ export default function AuthPage() {
               src={isLogin ? loginImg : signupImg}
               alt="Auth background"
               className="w-full h-full object-cover"
+              loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/30 md:bg-gradient-to-r md:from-black/80 md:to-black/30" />
-            <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 text-white">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30 md:bg-gradient-to-r md:from-black/70 md:to-black/30" />
+            <div className="absolute bottom-8 left-8 text-white">
               <motion.h2 
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
-                className="text-lg sm:text-2xl md:text-4xl font-bold mb-1 sm:mb-2"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2"
               >
                 {isLogin ? "Join our community" : "Discover amazing content"}
               </motion.h2>
@@ -205,7 +269,7 @@ export default function AuthPage() {
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="text-xs sm:text-sm md:text-base max-w-xs sm:max-w-md"
+                className="text-sm md:text-base max-w-xs md:max-w-md"
               >
                 {isLogin ? "Create an account to unlock all features" : "Sign in to access your personalized dashboard"}
               </motion.p>
