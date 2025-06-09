@@ -1,18 +1,12 @@
+# React + Vite
 
-### 2. Frontend README (frontend/README.md)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Overview
-The frontend of AutoEDA is built using React and Vite, providing a responsive and user-friendly interface for users to upload datasets and manage preprocessing tasks. It communicates with the backend to retrieve processed data and offers a seamless experience.
+Currently, two official plugins are available:
 
-## Workflow
-1. **File Upload**: Users can upload their CSV files through a dedicated upload interface.
-2. **Data Preprocessing**: Once uploaded, the data is sent to the backend for preprocessing.
-3. **Download Processed Data**: Users can download the cleaned and preprocessed dataset directly from the frontend.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Running the Frontend
-To run the frontend locally, follow these steps:
+## Expanding the ESLint configuration
 
-1. Navigate to the `frontend` directory:
-  cd frontend
-  npm install
-  npm run dev
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
