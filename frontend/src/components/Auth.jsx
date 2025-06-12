@@ -62,8 +62,6 @@ const AuthForm = ({ isLogin, toggleForm }) => {
         setAuthError(result.message || 'Authentication failed. Please try again.');
         return;
       }
-      
-      // Save token to localStorage
       if (result.token) {
         localStorage.setItem('authToken', result.token);
       }
@@ -72,10 +70,8 @@ const AuthForm = ({ isLogin, toggleForm }) => {
         localStorage.setItem('user', JSON.stringify(result.user));
       }
       
-      // Show success message
       toast.success(result.message || (isLogin ? 'Login successful!' : 'Account created successfully!'));
       
-      // Redirect to dashboard on successful login/signup
       navigate('/');
       
     } catch (error) {
