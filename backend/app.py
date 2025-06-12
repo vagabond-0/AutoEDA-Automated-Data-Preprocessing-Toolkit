@@ -26,11 +26,16 @@ db = mongo_client.get_database()
 users_collection = db.users
 
 ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:5173",
     "https://auto-eda-automated-data-preprocessing-toolkit.vercel.app"
 ]
 
-CORS(app, resources={r"/upload": {"origins": ALLOWED_ORIGINS}}, supports_credentials=True)
+CORS(app, resources={
+    r"/upload": {"origins": ALLOWED_ORIGINS},
+    r"/login": {"origins": ALLOWED_ORIGINS},
+    r"/signup": {"origins": ALLOWED_ORIGINS},
+    r"/me": {"origins": ALLOWED_ORIGINS},
+}, supports_credentials=True)
 
 
 def is_valid_email(email):
