@@ -1,19 +1,24 @@
 import React from 'react';
-import { Button } from './ui/button';
-import { useNavigate } from 'react-router-dom';
 import About from './About';
 import FileUpload from './FileUpload';
+import Navbar from './Navbar';
+import Contact from './Contact';
 
 const Home = () => {
-  const navigate = useNavigate();
-
   return (
-    <div className="relative w-full min-h-screen flex flex-col gap-2 bg-white">
-      <div className="absolute top-4 right-4">
-    <Button onClick={()=>navigate('/auth')} variant="outline">Sign Up/Log In</Button>
+    <div className="relative w-full min-h-screen flex flex-col bg-white">
+      <Navbar />
+      <div className="pt-16">
+        <section id="about">
+          <About />
+        </section>
+        <section id="upload">
+          <FileUpload />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
       </div>
-     <About></About>
-     <FileUpload></FileUpload>
     </div>
   );
 };
