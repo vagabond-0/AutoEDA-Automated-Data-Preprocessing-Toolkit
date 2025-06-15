@@ -1,6 +1,3 @@
----
-
-````markdown
 # ⚡ AutoEDA - Automated Data Preprocessing Toolkit
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit?color=brightgreen)
