@@ -153,6 +153,4 @@ Have suggestions or questions? Let’s connect:
 
 > Built with ❤️ by the community, for the community.
 
-```
-
 ---
