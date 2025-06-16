@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link as ScrollLink } from 'react-scroll';
+import { Link as ScrollLink, Link } from 'react-scroll';
 import { useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
@@ -35,7 +35,7 @@ const Navbar = () => {
                   to={item.to}
                   spy={true}
                   smooth={true}
-                  offset={-64}
+                  offset={-70}
                   duration={500}
                   className="text-gray-600 hover:text-gray-900 cursor-pointer text-sm font-medium transition-colors"
                 >
@@ -80,7 +80,7 @@ const Navbar = () => {
                 to={item.to}
                 spy={true}
                 smooth={true}
-                offset={-64}
+                offset={-70}
                 duration={500}
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 cursor-pointer"
                 onClick={toggleMenu}
@@ -106,3 +106,12 @@ const Navbar = () => {
 };
 
 export default Navbar;
+<Link
+  to="how-it-works"
+  smooth={true}
+  duration={500}
+  offset={-70} // adjust if you have a fixed navbar
+  className="cursor-pointer px-4 py-2 hover:text-blue-600"
+>
+  How It Works
+</Link>
