@@ -59,7 +59,7 @@ const Navbar = () => {
                   to={item.to}
                   spy={true}
                   smooth={true}
-                  offset={-64}
+                  offset={-70}
                   duration={500}
                   className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white cursor-pointer text-sm font-medium transition-colors"
                 >
@@ -114,7 +114,7 @@ const Navbar = () => {
                 to={item.to}
                 spy={true}
                 smooth={true}
-                offset={-64}
+                offset={-70}
                 duration={500}
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white cursor-pointer"
                 onClick={toggleMenu}
