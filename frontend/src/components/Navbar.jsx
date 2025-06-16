@@ -22,7 +22,12 @@ const Navbar = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center">
+            <img
+              className="h-10 w-10 mr-2"
+              src="./public/eda.png"
+              alt="AutoEDA Logo"
+            />
             <span className="text-xl font-semibold text-gray-900">AutoEDA</span>
           </div>
 
