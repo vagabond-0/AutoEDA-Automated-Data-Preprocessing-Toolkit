@@ -6,7 +6,7 @@ import Contact from './Contact';
 
 const Home = () => {
   return (
-    <div className="relative w-full min-h-screen flex flex-col bg-white">
+    <div className="relative w-full min-h-screen flex flex-col bg-background text-foreground">
       <Navbar />
       <div className="pt-16">
         <section id="about">
