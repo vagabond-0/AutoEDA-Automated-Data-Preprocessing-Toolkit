@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 frontend/node_modules/
-
+.venv
 
 # Editor directories and files
 .vscode/*
