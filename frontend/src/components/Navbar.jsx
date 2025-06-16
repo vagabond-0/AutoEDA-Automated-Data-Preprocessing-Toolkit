@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { useNavigate } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Button } from './ui/button';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
 
   const navItems = [
@@ -17,18 +18,41 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    if (newMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setDarkMode(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
+    <nav className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-xl font-semibold text-gray-900">AutoEDA</span>
+            <span className="text-xl font-semibold text-gray-900 dark:text-white">AutoEDA</span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-8">
+            <div className="ml-10 flex items-center space-x-6">
               {navItems.map((item) => (
                 <ScrollLink
                   key={item.to}
@@ -37,22 +61,32 @@ const Navbar = () => {
                   smooth={true}
                   offset={-64}
                   duration={500}
-                  className="text-gray-600 hover:text-gray-900 cursor-pointer text-sm font-medium transition-colors"
+                  className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white cursor-pointer text-sm font-medium transition-colors"
                 >
                   {item.name}
                 </ScrollLink>
               ))}
+
+              {/* Dark Mode Toggle */}
+              <Button
+                variant="ghost"
+                onClick={toggleDarkMode}
+                className="rounded-full p-2"
+              >
+                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
+
+              {/* Login / Signup */}
               <Button
                 onClick={() => navigate('/auth')}
                 variant="default"
-                className="ml-4"
               >
                 Login / Signup
               </Button>
             </div>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <Button
               variant="default"
@@ -82,19 +116,42 @@ const Navbar = () => {
                 smooth={true}
                 offset={-64}
                 duration={500}
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 cursor-pointer"
+                className="block rounded-md px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white cursor-pointer"
                 onClick={toggleMenu}
               >
                 {item.name}
               </ScrollLink>
             ))}
+
+            {/* Dark Mode Toggle Mobile */}
+            <Button
+              variant="ghost"
+              onClick={() => {
+                toggleDarkMode();
+                toggleMenu();
+              }}
+              className="w-full flex justify-start space-x-2"
+            >
+              {darkMode ? (
+                <>
+                  <Sun className="h-5 w-5" />
+                  <span>Light Mode</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="h-5 w-5" />
+                  <span>Dark Mode</span>
+                </>
+              )}
+            </Button>
+
             <Button
               onClick={() => {
                 navigate('/auth');
                 toggleMenu();
               }}
               variant="default"
-              className="mt-4 w-full"
+              className="mt-2 w-full"
             >
               Login / Signup
             </Button>
