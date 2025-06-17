@@ -7,8 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import { Loader2, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const AuthForm = ({ isLogin, toggleForm }) => {
+  const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
   const {
     register,
     handleSubmit,
@@ -217,6 +220,7 @@ const AuthForm = ({ isLogin, toggleForm }) => {
        variant="outline" 
        className="w-full py-5 sm:py-6 text-sm sm:text-base flex items-center justify-center gap-2" 
        type="button"
+       onClick={() => loginWithRedirect()}
      >
        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
