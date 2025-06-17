@@ -5,83 +5,76 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit)
 ![Issues](https://img.shields.io/github/issues/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit)
 ![License](https://img.shields.io/github/license/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit)
+![GitHub Stars](https://img.shields.io/github/stars/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit?style=flat-square)
 
-> ⚙️ *Automate your data preprocessing pipeline with speed, intelligence, and modularity.*
+> ⚡ Automate tedious data cleaning — focus more on insights, not pipelines.
 
 ---
 
 ## 📌 Table of Contents
 
-- [🔍 Overview](#-overview)
-- [✨ Key Features](#-key-features)
-- [🧱 Project Architecture](#-project-architecture)
-- [📦 Requirements](#-requirements)
-- [🚀 Getting Started](#-getting-started)
-- [🤝 How to Contribute](#-how-to-contribute)
-- [🛡 License](#-license)
-- [📬 Contact](#-contact)
-
----
+* [🔍 Overview](#-overview)
+* [✨ Key Features](#-key-features)
+* [🧱 Project Architecture](#-project-architecture)
+* [📦 Requirements](#-requirements)
+* [🚀 Getting Started](#-getting-started)
+* [🤝 How to Contribute](#-how-to-contribute)
+* [🛡 License](#-license)
+* [📬 Contact](#-contact)
 
 ## 🔍 Overview
 
-**AutoEDA** is an open-source, plug-and-play toolkit designed to **automate data preprocessing workflows** for **Exploratory Data Analysis (EDA)** and **Machine Learning**.
+AutoEDA is a lightweight yet powerful toolkit that streamlines data preprocessing for Exploratory Data Analysis (EDA) and Machine Learning.
 
-This project simplifies dataset preparation by automating common preprocessing tasks like null value imputation, feature engineering, and data transformation—so you can focus more on building and analyzing models.
-
----
+It automates routine cleaning tasks such as missing value treatment, type correction, and feature engineering, helping data scientists and analysts unlock insights faster and with less friction.
 
 ## ✨ Key Features
 
-✅ Automated CSV loading & validation  
-✅ Null value handling & type correction  
-✅ Duplicate removal & data cleanup  
-✅ Intelligent feature generation  
-✅ API integration for model workflows  
-✅ Interactive frontend UI using React + Vite  
-✅ One-click deployment with Docker  
-
----
+* ✅ Seamless CSV upload & schema validation
+* ✅ Null value imputation & type inference
+* ✅ Smart duplicate detection & cleanup
+* ✅ Feature extraction and transformation
+* ✅ REST API support for integration
+* ✅ Modern React + Vite frontend
+* ✅ Dockerized deployment for easy setup
 
 ## 🧱 Project Architecture
 
 ### 🧠 Backend (Python)
-- Data cleaning, feature engineering, and preprocessing modules.
-- FastAPI-based RESTful API for communication with the frontend.
-- Easily extendable structure for custom ML modules.
+
+* Modular design for cleaning, transforming, and preprocessing datasets
+* Built with FastAPI for high-speed async REST APIs
+* Easily extendable for custom ML workflows
 
 ### 🎨 Frontend (React + Vite)
-- Clean and responsive user interface.
-- Pages for uploading datasets, visualizing results, and exporting outputs.
-- Optional: add feedback, documentation, and help sections.
+
+* Sleek UI for uploading, previewing, and processing datasets
+* Designed for responsiveness and ease-of-use
+* Optional sections for documentation, help, and dataset history
 
 ### 🐳 Docker Support
-- Full Dockerization for hassle-free deployment and testing.
-- Cross-platform compatibility ensured.
 
----
+* Docker & Docker Compose configuration for cross-platform deployment
+* One command to launch the full app stack
 
 ## 📦 Requirements
 
-Before you begin, ensure you have the following:
+* 🧑‍💻 Frontend: React.js, Vite
+* 🐍 Backend: Python 3.x, FastAPI, Pandas
+* 🐳 Containerization: Docker & Docker Compose
 
-- 🧑‍💻 **Frontend**: `React.js`, `Vite`
-- 🐍 **Backend**: `Python 3.x`, `FastAPI`, `Pandas`, etc.
-- 🐳 **Containerization**: `Docker` & `Docker Compose`
-- ⚠️ Don’t forget to configure your `.gitignore`!
-
----
+> ⚠️ Remember to configure your `.gitignore` and environment variables!
 
 ## 🚀 Getting Started
 
-### 1️⃣ Clone the repository
+1️⃣ **Clone the repository**
 
 ```bash
 git clone https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit
 cd AutoEDA-Automated-Data-Preprocessing-Toolkit
-````
+```
 
-### 2️⃣ Setup the backend
+2️⃣ **Run the backend**
 
 ```bash
 cd backend
@@ -89,7 +82,7 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-### 3️⃣ Setup the frontend
+3️⃣ **Launch the frontend**
 
 ```bash
 cd frontend
@@ -97,60 +90,54 @@ npm install
 npm run dev
 ```
 
-### 4️⃣ \[Optional] Run with Docker
+4️⃣ **\[Optional] Run everything with Docker**
 
 ```bash
 docker-compose up --build
 ```
 
----
-
 ## 🤝 How to Contribute
 
-We 💖 contributions! Here’s how you can help:
+We 💖 community contributions! Here’s how you can make an impact:
 
 ### 🔧 Frontend
 
-* Improve UI/UX with modern libraries.
-* Add new pages (e.g., Documentation, Feedback).
-* Implement interactive dataset visualizations.
+*
 
 ### 🧪 Model Pipeline
 
-* Improve data loading and handling.
-* Create intelligent null-handling strategies.
-* Design custom feature engineering tools.
-* Add support for preprocessing ML-ready datasets.
+*
 
 ### ⚙️ Backend
 
-* Add API endpoints for new functionalities.
-* Improve integration and response time.
-* Write tests for data transformations and routes.
-* Enhance Docker support and build pipeline.
+*
 
-> 📢 New to open source? Check out our [CONTRIBUTING.md](CONTRIBUTING.md) for a quick start guide!
+📢 New to open source? Start here: [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
----
+✨ Looking for ideas? Explore [Good First Issues](https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit/labels/good%20first%20issue)
 
 ## 🛡 License
 
-This project is licensed under a **Modified MIT License**.
+This project uses a **Modified MIT License**.
 
-> 🔒 **Note**: This license includes additional restrictions. Please read the [LICENSE](LICENSE) file carefully before using or contributing.
-
----
+🔒 **Please read the ****`LICENSE`**** file** carefully before using or contributing.
 
 ## 📬 Contact
 
-Have suggestions or questions? Let’s connect:
+We'd love to hear from you!
 
-* Open an [issue](https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit/issues)
-* Submit a [pull request](https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit/pulls)
-* Drop a ⭐ if you find the project useful!
+* 🗨 [Open an issue](https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit/issues/new)
+* 🔁 [Submit a pull request](https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit/pulls)
+* ⭐ Star the repo if you find it helpful
+
+> Built with ❤️ by passionate developers — for the community, by the community.
+
+## ✨ If you found this project useful...
+
+Please consider ⭐ starring the repository and sharing it with your team or on social media.
 
 ---
 
-> Built with ❤️ by the community, for the community.
+> "Keep pushing boundaries — even small steps can lead to powerful transformations. 🌱"
 
----
+> "Believe in the process, trust your curiosity, and let every dataset take you one step closer to mastery. 💡📊"
