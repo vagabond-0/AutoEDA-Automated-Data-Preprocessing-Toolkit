@@ -3,11 +3,13 @@ import { Link as ScrollLink } from 'react-scroll';
 import { useNavigate } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Button } from './ui/button';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
+  const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
 
   const navItems = [
     { name: 'About Us', to: 'about' },
@@ -77,12 +79,18 @@ const Navbar = () => {
               </Button>
 
               {/* Login / Signup */}
-              <Button
-                onClick={() => navigate('/auth')}
-                variant="default"
-              >
-                Login / Signup
-              </Button>
+              {isAuthenticated ? (
+                <Button
+                onClick={() => logout()}
+                >Logout</Button>
+              ) : (
+                <Button
+                  onClick={() => navigate('/auth')}
+                  variant="default"
+                >
+                  Login / Signup
+                </Button>
+              )}
             </div>
           </div>
 

@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import Footer from './components/Footer'; //  Import Footer
+import Profile from './components/userProfile';
 
 const App = () => {
   return (
