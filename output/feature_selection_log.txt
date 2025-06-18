@@ -1,0 +1,71 @@
+Feature Selection Log
+==============================
+
+Timestamp: 2025-06-18 21:57:03.139327
+Function: remove_low_variance
+Parameters: threshold=0.01
+Original feature count: 12
+Removed feature count: 3
+Removed features: ['LowVar_Col', 'Imp_Feat2_Weak', 'Imp_Feat3_VeryWeak']
+
+Timestamp: 2025-06-18 21:57:03.143269
+Function: remove_highly_correlated
+Parameters: threshold=0.85
+Original feature count: 9
+Removed feature count: 3
+Removed features: ['Corr_Col2', 'Corr_Col3', 'ID']
+
+Timestamp: 2025-06-18 21:57:03.290570
+Function: select_by_model_importance
+Parameters: task_type='regression', threshold=0.05
+Numeric feature count for model: 5
+Removed numeric feature count: 4
+Removed numeric features: ['MedVar_Col', 'Corr_Col1', 'Imp_Feat1', 'Target_Class']
+
+
+Feature Selection Pipeline Summary for output\sample_input.csv:
+
+Timestamp: 2025-06-18 21:57:03.134831
+Parameters: LV_threshold=0.01, Corr_threshold=0.85, Imp_threshold=0.05, Task=regression
+Initial number of features: 12
+Dropped 6 rows due to NaNs in target 'Target_Reg'.
+After remove_low_variance: 9 features remaining. (3 removed)
+After remove_highly_correlated: 6 features remaining. (3 removed)
+After select_by_model_importance: 2 features remaining. (4 removed)
+Final selected feature count: 2
+Output saved to: output\sample_output_regression.csv
+
+Timestamp: 2025-06-18 21:57:03.310973
+Function: remove_low_variance
+Parameters: threshold=0.01
+Original feature count: 12
+Removed feature count: 3
+Removed features: ['LowVar_Col', 'Imp_Feat2_Weak', 'Imp_Feat3_VeryWeak']
+
+Timestamp: 2025-06-18 21:57:03.313404
+Function: remove_highly_correlated
+Parameters: threshold=0.85
+Original feature count: 9
+Removed feature count: 4
+Removed features: ['Corr_Col2', 'Corr_Col3', 'ID', 'Target_Reg']
+
+Timestamp: 2025-06-18 21:57:03.462655
+Function: select_by_model_importance
+Parameters: task_type='classification', threshold=0.05
+Numeric feature count for model: 4
+Removed numeric feature count: 3
+Removed numeric features: ['MedVar_Col', 'Corr_Col1', 'Imp_Feat1']
+
+
+Feature Selection Pipeline Summary for output\sample_input.csv:
+
+Timestamp: 2025-06-18 21:57:03.308164
+Parameters: LV_threshold=0.01, Corr_threshold=0.85, Imp_threshold=0.05, Task=classification
+Initial number of features: 12
+Dropped 6 rows due to NaNs in target 'Target_Class'.
+After remove_low_variance: 9 features remaining. (3 removed)
+After remove_highly_correlated: 5 features remaining. (4 removed)
+After select_by_model_importance: 2 features remaining. (3 removed)
+Final selected feature count: 2
+Output saved to: output\sample_output_classification.csv
+
