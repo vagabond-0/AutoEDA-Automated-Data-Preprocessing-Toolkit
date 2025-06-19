@@ -1,0 +1,101 @@
+RecordID,EmployeeName,Department,Salary,YearsOfService,JoiningDate,PerformanceRating,LargeNumericValue
+1,Employee_1,Development,103374.47,4,2021-11-21,Needs Improvement,40571
+2,Employee_2,Marketing,117566.26,4,2018-10-27,Meets,23080
+3,Employee_3,HR,99590.09,1,2021-05-07,Needs Improvement,34615
+4,Employee_4,IT,116085.68,2,2019-09-14,Exceeds,25068
+5,Employee_5,IT,109587.66,1,2018-01-27,Meets,34690
+6,Employee_6,Development,67975.69,10,03/10/2021,Needs Improvement,45827
+7,Employee_7,HR,67264.17,13,2018-06-08,Meets,31278
+8,Employee_8,Marketing,54211.94,15,2020-12-27,Exceeds,16322
+9,Employee_9,Marketing,72518.96,14,2021-03-05,Needs Improvement,30441
+10,Employee_10,Sales,91537.16,10,2022-04-30,Exceeds,45807
+11,Employee_11,HR,67461.88,5,InvalidDate,Needs Improvement,24058
+12,Employee_12,IT,95666.77,15,2019-11-20,Meets,22190
+13,Employee_13,IT,111145.96,12,2021-07-10,Exceeds,2163
+14,Employee_14,Sales,54350.97,9,2021-03-14,Meets,43998
+15,Employee_15,Development,99467.24,10,2022-01-26,Exceeds,7022
+16,Employee_16,Development,104421.02,14,,Needs Improvement,12532
+17,Employee_17,Marketing,71528.09,15,2019-07-18,Exceeds,6532
+18,Employee_18,IT,73480.69,1,2022-02-01,Meets,33906
+19,Employee_19,IT,85500.47,2,2020-02-29,Needs Improvement,7403
+20,Employee_20,Marketing,72011.56,13,2022-07-22,Needs Improvement,49120
+21,Employee_21,Marketing,114538.64,8,2019-03-29,Exceeds,6658
+22,Employee_22,IT,78379.56,14,2021-12-06,Needs Improvement,36929
+23,Employee_23,IT,52350.83,9,2022-08-20,Meets,8933
+24,Employee_24,Marketing,88205.95,6,2022-05-07,Exceeds,39321
+25,Employee_25,IT,76084.01,15,2022-02-03,Meets,12819
+26,Employee_26,Marketing,91204.44,3,2021-10-29,Needs Improvement,26461
+27,Employee_27,IT,101292.83,7,2018-11-19,Exceeds,19585
+28,Employee_28,Development,94917.88,14,2018-09-04,Exceeds,24945
+29,Employee_29,Sales,110182.77,8,2021-10-16,Needs Improvement,11323
+30,Employee_30,Marketing,81687.27,11,2022-07-18,Exceeds,37386
+31,Employee_31,Sales,97831.05,9,2021-07-18,Meets,48908
+32,Employee_32,Sales,94936.65,13,2022-10-17,Exceeds,13252
+33,Employee_33,HR,69015.91,5,2021-05-21,Needs Improvement,36191
+34,Employee_34,Development,83496.58,7,2018-05-20,Exceeds,14379
+35,Employee_35,HR,119375.29,13,2018-06-30,Exceeds,33131
+36,Employee_36,Development,78963.71,13,2019-10-09,Meets,23959
+37,Employee_37,IT,110207.05,14,2022-05-24,Needs Improvement,41661
+38,Employee_38,IT,83196.95,6,2022-08-25,Meets,3308
+39,Employee_39,Sales,86442.89,8,2021-09-01,Needs Improvement,30726
+40,Employee_40,Sales,77367.67,15,2019-01-02,Exceeds,49114
+41,Employee_41,Development,56653.83,8,2021-04-08,Meets,21317
+42,Employee_42,Development,69653.8,4,2021-04-20,Exceeds,16074
+43,Employee_43,Sales,83260.08,4,2018-08-02,Meets,38337
+44,Employee_44,IT,77765.3,14,2018-01-01,Needs Improvement,3307
+45,Employee_45,IT,81800.73,9,2019-06-05,Exceeds,6824
+46,Employee_46,Marketing,86711.08,15,2022-10-24,Needs Improvement,19578
+47,Employee_47,Development,60899.41,7,2022-07-24,Exceeds,17154
+48,Employee_48,Development,118344.5,10,2020-07-02,Needs Improvement,9311
+49,Employee_49,Marketing,106829.94,6,2021-01-21,Exceeds,21546
+50,Employee_50,IT,88270.6,13,2020-09-12,Meets,17465
+51,Employee_51,Marketing,67216.11,6,2020-04-26,Meets,3254
+52,Employee_52,IT,54057.63,2,2022-08-19,Meets,38203
+53,Employee_53,Marketing,80502.15,5,2020-03-09,Meets,30185
+54,Employee_54,Marketing,71018.84,6,2022-06-23,Meets,19261
+55,Employee_55,Sales,60055.94,2,2022-05-14,Needs Improvement,24095
+56,Employee_56,IT,60713.61,3,2021-03-18,Exceeds,41269
+57,Employee_57,Development,118932.44,4,2019-12-16,Meets,35694
+58,Employee_58,HR,73108.6,4,2021-06-11,Exceeds,11904
+59,Employee_59,Sales,116670.19,12,2021-09-20,Needs Improvement,35465
+60,Employee_60,Development,101980.13,9,2021-09-09,Needs Improvement,18366
+61,Employee_61,Development,63884.99,9,2021-06-25,Exceeds,12329
+62,Employee_62,Marketing,92136.59,2,2018-04-21,Exceeds,45441
+63,Employee_63,Development,66601.36,14,2019-04-07,Exceeds,21075
+64,Employee_64,Marketing,94096.14,1,2018-06-03,Needs Improvement,23680
+65,Employee_65,Marketing,81360.95,14,2018-08-01,Meets,14211
+66,Employee_66,IT,118248.75,9,2020-02-14,Exceeds,44838
+67,Employee_67,Marketing,86908.57,11,2019-09-10,Exceeds,30078
+68,Employee_68,IT,56367.44,4,2019-05-10,Meets,24486
+69,Employee_69,HR,118822.19,3,2021-05-25,Meets,32211
+70,Employee_70,HR,118186.99,2,2022-02-24,Meets,13143
+71,Employee_71,Sales,115844.76,12,2019-03-14,Meets,37985
+72,Employee_72,HR,64388.43,1,2018-02-28,Needs Improvement,12606
+73,Employee_73,Sales,67945.83,9,2022-07-28,Needs Improvement,36055
+74,Employee_74,Development,62452.64,8,2019-09-30,Needs Improvement,28909
+75,Employee_75,HR,116418.11,15,2018-02-26,Needs Improvement,17118
+76,Employee_76,HR,89995.78,3,2022-09-19,Needs Improvement,1890
+77,Employee_77,HR,84796.95,11,2021-12-13,Exceeds,25257
+78,Employee_78,Sales,116027.01,11,2022-09-06,Exceeds,45034
+79,Employee_79,Development,69742.14,10,2018-04-12,Needs Improvement,13167
+80,Employee_80,HR,111545.17,14,2018-01-11,Needs Improvement,48749
+81,Employee_81,Marketing,116525.46,13,2022-05-01,Needs Improvement,28892
+82,Employee_82,IT,52789.61,2,2021-05-25,Meets,4113
+83,Employee_83,HR,61979.49,2,2022-01-05,Needs Improvement,29152
+84,Employee_84,Marketing,84480.04,9,2020-05-10,Exceeds,2271
+85,Employee_85,HR,58843.64,3,2022-09-23,Exceeds,15343
+86,Employee_86,Marketing,95508.49,8,2019-09-08,Needs Improvement,12882
+87,Employee_87,HR,101435.64,4,2019-12-23,Meets,15496
+88,Employee_88,Development,69395.26,9,2019-12-28,Exceeds,29358
+89,Employee_89,IT,103407.35,7,2020-03-09,Exceeds,20088
+90,Employee_90,IT,80735.75,10,2018-07-24,Meets,11368
+91,Employee_91,Sales,80840.95,9,2019-07-12,Exceeds,33412
+92,Employee_92,HR,66079.02,3,2021-10-30,Exceeds,23431
+93,Employee_93,Development,113096.29,11,2021-08-11,Meets,24252
+94,Employee_94,Sales,51614.6,4,2021-03-20,Exceeds,22249
+95,Employee_95,Sales,112717.85,4,2020-12-09,Meets,38267
+96,Employee_96,Marketing,99787.18,4,2021-04-28,Meets,44517
+97,Employee_97,Sales,116184.72,5,2021-08-18,Meets,37181
+98,Employee_98,Sales,61235.81,12,2018-09-30,Meets,5708
+99,Employee_99,Development,59337.95,5,2022-03-19,Needs Improvement,17372
+100,Employee_100,IT,88292.78,4,2022-11-04,Exceeds,2139
