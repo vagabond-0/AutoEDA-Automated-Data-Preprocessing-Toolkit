@@ -1,9 +1,13 @@
 import pandas as pd
-import numpy as np
 import logging
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+# Configure logging basic settings
+log_format = '%(asctime)s - %(levelname)s - %(message)s'
+logging.basicConfig(level=logging.INFO, format=log_format)
+
+
+# Two blank lines before function definition
 def optimize_dtypes(df: pd.DataFrame) -> pd.DataFrame:
     """
     Optimizes the data types of columns in a Pandas DataFrame.
@@ -20,38 +24,56 @@ def optimize_dtypes(df: pd.DataFrame) -> pd.DataFrame:
         col_type = df_optimized[col].dtype
 
         if col_type == 'object':
-            # Attempt to convert columns with 'date', 'time', or 'timestamp' in their names to datetime FIRST
-            if any(keyword in col.lower() for keyword in ['date', 'time', 'timestamp']):
+            # Attempt to convert columns with specific keywords to datetime
+            is_datetime_like = any(keyword in col.lower()
+                                   for keyword in ['date', 'time', 'timestamp'])
+            if is_datetime_like:
                 try:
                     df_optimized[col] = pd.to_datetime(df_optimized[col])
-                    logging.info(f"Column '{col}' converted to datetime.")
+                    log_msg = (f"Col '{col}' conv "  # Minimized first part
+                               f"to datetime.")
+                    logging.info(log_msg)
                 except ValueError:
-                    logging.warning(f"Could not convert column '{col}' to datetime. It might not be a valid date/time format.")
+                    log_msg = (f"Could not convert col '{col}' to datetime. "
+                               "Might not be valid date/time format.")
+                    logging.warning(log_msg)
                 except Exception as e:
-                    logging.error(f"Error converting column '{col}' to datetime: {e}")
-            # Then, if not converted to datetime, try converting to 'category' if nunique < 50
-            elif df_optimized[col].nunique() < 50 and df_optimized[col].dtype == 'object': # check dtype again in case it was converted by previous step
+                    log_msg = (f"ERR conv '{col}' "  # Minimized first part
+                               f"to datetime: {e}")
+                    logging.error(log_msg)
+            # Convert to 'category' if low cardinality and still object type
+            elif (df_optimized[col].nunique() < 50 and
+                  df_optimized[col].dtype == 'object'):
                 try:
                     df_optimized[col] = df_optimized[col].astype('category')
-                    logging.info(f"Column '{col}' converted to category.")
+                    log_msg = f"Col '{col}' to category."
+                    logging.info(log_msg)
                 except Exception as e:
-                    logging.error(f"Error converting column '{col}' to category: {e}")
+                    log_msg = (f"ERR conv '{col}' "
+                               f"to category: {e}")
+                    logging.error(log_msg)
 
         # Downcast float64 columns to float32
         elif col_type == 'float64':
             try:
                 df_optimized[col] = pd.to_numeric(df_optimized[col], downcast='float')
-                logging.info(f"Column '{col}' downcasted to float32.")
+                log_msg = f"Col '{col}' to float32."
+                logging.info(log_msg)
             except Exception as e:
-                logging.error(f"Error downcasting column '{col}' to float32: {e}")
+                log_msg = (f"ERR downcast '{col}' "
+                           f"to float32: {e}")
+                logging.error(log_msg)
 
         # Downcast int64 columns to the smallest possible integer subtype
         elif col_type == 'int64':
             try:
                 df_optimized[col] = pd.to_numeric(df_optimized[col], downcast='integer')
-                logging.info(f"Column '{col}' downcasted to smallest possible integer subtype.")
+                log_msg = f"Col '{col}' to smallest int."
+                logging.info(log_msg)
             except Exception as e:
-                logging.error(f"Error downcasting column '{col}' to smaller integer: {e}")
+                log_msg = (f"ERR downcast '{col}' "  # Minimized first part
+                           f"to smaller int: {e}")
+                logging.error(log_msg)
 
     return df_optimized
 
@@ -66,25 +88,42 @@ def optimize_csv(input_path: str, output_path: str) -> None:
     """
     try:
         df = pd.read_csv(input_path)
-        logging.info(f"Successfully read CSV from '{input_path}'.")
+        log_msg = (f"Read CSV "  # Minimized first part
+                   f"from '{input_path}'.")
+        logging.info(log_msg)
     except FileNotFoundError:
-        logging.error(f"Error: Input CSV file not found at '{input_path}'.")
+        log_msg = f"CSV not found: '{input_path}'."
+        logging.error(log_msg)
         return
     except Exception as e:
-        logging.error(f"Error reading CSV from '{input_path}': {e}")
+        log_msg = (f"ERR reading CSV "
+                   f"'{input_path}': {e}")
+        logging.error(log_msg)
         return
 
     original_memory_usage = df.memory_usage(deep=True).sum()
-    logging.info(f"Original memory usage: {original_memory_usage / (1024 * 1024):.2f} MB")
+    mem_orig_mb = original_memory_usage / (1024 * 1024)
+    logging.info(f"Original memory: {mem_orig_mb:.2f} MB")
 
     df_optimized = optimize_dtypes(df)
 
     optimized_memory_usage = df_optimized.memory_usage(deep=True).sum()
-    logging.info(f"Optimized memory usage: {optimized_memory_usage / (1024 * 1024):.2f} MB")
-    logging.info(f"Memory usage reduced by {original_memory_usage - optimized_memory_usage} bytes ({(original_memory_usage - optimized_memory_usage) / original_memory_usage * 100:.2f}%).")
+    mem_opt_mb = optimized_memory_usage / (1024 * 1024)
+    logging.info(f"Optimized memory: {mem_opt_mb:.2f} MB")
+
+    reduction_bytes = original_memory_usage - optimized_memory_usage
+    reduction_percent = 0
+    if original_memory_usage > 0:
+        reduction_percent = (reduction_bytes / original_memory_usage) * 100
+    log_msg_reduction = (
+        f"Mem. reduced by {reduction_bytes} bytes ({reduction_percent:.2f}%)."
+    )
+    logging.info(log_msg_reduction)
 
     try:
         df_optimized.to_csv(output_path, index=False)
-        logging.info(f"Successfully saved optimized CSV to '{output_path}'.")
+        log_msg = f"Saved optimized CSV to '{output_path}'."
+        logging.info(log_msg)
     except Exception as e:
-        logging.error(f"Error saving optimized CSV to '{output_path}': {e}")
+        log_msg = f"ERR saving CSV to '{output_path}': {e}"
+        logging.error(log_msg)
