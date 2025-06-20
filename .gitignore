@@ -24,3 +24,5 @@ _pycache_
 *.njsproj
 *.sln
 *.sw?
+
+venv/
