@@ -20,9 +20,9 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=24)
 jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
 
-mongo_uri = os.getenv("MONGODB_URI", "mongodb://localhost:27017/autoeda")
+mongo_uri = os.getenv("MONGODB_URI") # Ensure you have set this in your .env file
 mongo_client = MongoClient(mongo_uri)
-db = mongo_client.get_database()
+db = mongo_client["auto-eda-backend"] #Change to your database name
 users_collection = db.users
 
 ALLOWED_ORIGINS = [
@@ -35,6 +35,7 @@ CORS(app, resources={
     r"/login": {"origins": ALLOWED_ORIGINS},
     r"/signup": {"origins": ALLOWED_ORIGINS},
     r"/me": {"origins": ALLOWED_ORIGINS},
+    r"/contact": {"origins": ALLOWED_ORIGINS}, 
 }, supports_credentials=True)
 
 
@@ -50,6 +51,59 @@ def is_strong_password(password):
     if not any(c.isdigit() for c in password):
         return False
     return True
+
+# Validate contact us from input
+def validate_contact_form(data):
+    errors = []
+    if not data.get('name') or len(data.get('name', '').strip()) < 2:
+        errors.append("Name must be at least 2 characters long")
+    if not data.get('email') or not is_valid_email(data.get('email', '')):
+        errors.append("Please provide a valid email address")
+    if not data.get('subject') or len(data.get('subject', '').strip()) < 3:
+        errors.append("Subject must be at least 3 characters long")
+    if not data.get('message') or len(data.get('message', '').strip()) < 10:
+        errors.append("Message must be at least 10 characters long")
+    return errors
+
+# Add this new endpoint
+@app.route('/contact', methods=['POST'])
+def handle_contact():
+    data = request.get_json()
+    
+    # Validate the form data
+    validation_errors = validate_contact_form(data)
+    if validation_errors:
+        return jsonify({
+            'status': 'error',
+            'message': 'Validation failed',
+            'errors': validation_errors
+        }), 400
+    
+    try:
+        # Store the contact submission in MongoDB
+        contact_submission = {
+            'name': data['name'].strip(),
+            'email': data['email'].lower().strip(),
+            'subject': data['subject'].strip(),
+            'message': data['message'].strip(),
+            'submitted_at': pd.Timestamp.now().isoformat(),
+            'status': 'new'
+        }
+        
+        # Insert into MongoDB
+        db.contact_submissions.insert_one(contact_submission)
+        
+        return jsonify({
+            'status': 'success',
+            'message': 'Your message has been received! We will get back to you soon.'
+        }), 201
+        
+    except Exception as e:
+        print(f"Error handling contact submission: {str(e)}")
+        return jsonify({
+            'status': 'error',
+            'message': 'An unexpected error occurred. Please try again later.'
+        }), 500
 
 
 @app.route('/signup', methods=['POST'])
