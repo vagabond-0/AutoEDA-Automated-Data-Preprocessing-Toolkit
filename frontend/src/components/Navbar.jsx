@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Button } from './ui/button';
 import { useAuth0 } from "@auth0/auth0-react";
+import logg from './Aut.svg';
+import loggd from './Autd.svg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,8 +51,14 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-xl font-semibold text-gray-900 dark:text-white">AutoEDA</span>
+            {/* Light mode logo */}
+            <img src={logg} alt="AutoEDA Logo" className="h-8 w-auto block dark:hidden" />
+
+            {/* Dark mode logo */}
+            <img src={loggd} alt="AutoEDA Logo" className="h-8 w-auto hidden dark:block" />
           </div>
+
+
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
