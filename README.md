@@ -3,7 +3,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./frontend/src/components/Autd.svg" />
   <source media="(prefers-color-scheme: light)" srcset="./frontend/src/components/Aut.svg" />
-  <img src="path/to/light-logo.png" alt="Project Logo" width="200" />
+  <img src="path/to/light-logo.png" alt="Project Logo" width="250" />
 </picture>
 
 </div>
