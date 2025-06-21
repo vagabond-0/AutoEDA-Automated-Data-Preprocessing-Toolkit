@@ -6,67 +6,48 @@ import logging
 
 logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
 
-
-
 # --------------*NULL HANDLING STRATEGIES*------------------
 
-
 def drop_nulls(df: pd.DataFrame) -> pd.DataFrame:
-    """Drop all rows containing any null values."""
     return df.dropna()
 
 def replace_with_fixed(df: pd.DataFrame, value=0) -> pd.DataFrame:
-    """Replace all nulls with a fixed value (default: 0)."""
     return df.fillna(value)
 
 def replace_with_mean(df: pd.DataFrame) -> pd.DataFrame:
-    """Replace nulls in numeric columns with column means."""
     df_filled = df.copy()
     for col in df_filled.select_dtypes(include=[np.number]):
-        df_filled[col].fillna(df_filled[col].mean(), inplace=True)
+        df_filled[col] = df_filled[col].fillna(df_filled[col].mean())
     return df_filled
 
 def replace_with_median(df: pd.DataFrame) -> pd.DataFrame:
-    """Replace nulls in numeric columns with column medians."""
     df_filled = df.copy()
     for col in df_filled.select_dtypes(include=[np.number]):
-        df_filled[col].fillna(df_filled[col].median(), inplace=True)
+        df_filled[col] = df_filled[col].fillna(df_filled[col].median())
     return df_filled
 
 def replace_with_mode(df: pd.DataFrame) -> pd.DataFrame:
-    """Replace nulls with the most frequent value per column."""
     df_filled = df.copy()
     for col in df.columns:
         if df[col].isnull().any():
             mode_val = df[col].mode()
             if not mode_val.empty:
-                df_filled[col].fillna(mode_val.iloc[0], inplace=True)
+                df_filled[col] = df_filled[col].fillna(mode_val.iloc[0])
             elif df[col].dtype in ['object', 'category']:
-                df_filled[col].fillna("Unknown", inplace=True)
+                df_filled[col] = df_filled[col].fillna("Unknown")
             else:
-                df_filled[col].fillna(0, inplace=True)
+                df_filled[col] = df_filled[col].fillna(0)
     return df_filled
 
 def forward_fill(df: pd.DataFrame) -> pd.DataFrame:
-    """Fill nulls with previous valid value (forward fill)."""
     return df.ffill()
 
 def backward_fill(df: pd.DataFrame) -> pd.DataFrame:
-    """Fill nulls with next valid value (backward fill)."""
     return df.bfill()
 
+# ------------------*EVALUATION & STRATEGY SELECTION*----------------------
 
-
-# -----------------------*EVALUATION & STRATEGY SELECTION*----------------------------------------------
-
-
-def evaluate_methods(original_df: pd.DataFrame, cleaned_versions: Dict[str, pd.DataFrame]) -> str:
-    """
-    Evaluate methods based on:
-    - % of nulls eliminated
-    - Shape retention
-    - Return the name of the best method
-    """
+def evaluate_methods(original_df: pd.DataFrame, cleaned_versions: Dict[str, pd.DataFrame], log_lines: list) -> str:
     original_nulls = original_df.isnull().sum().sum()
     original_shape = original_df.shape
     best_score = float("-inf")
@@ -84,23 +65,22 @@ def evaluate_methods(original_df: pd.DataFrame, cleaned_versions: Dict[str, pd.D
             + col_ratio * 0.25
         )
 
-        logging.info(f"Method: {name}, Score: {score:.4f}, Nulls Remaining: {remaining_nulls}, Shape: {df.shape}")
-        
+        log_lines.append(f"Method tried: {name}")
+        log_lines.append(f" - Nulls removed: {nulls_removed}")
+        log_lines.append(f" - Remaining nulls: {remaining_nulls}")
+        log_lines.append(f" - Shape after cleaning: {df.shape}")
+        log_lines.append(f" - Strategy score: {score:.4f}\n")
+
         if score > best_score:
             best_score = score
             best_method = name
 
+    log_lines.append(f"✅ Best strategy selected: {best_method}\n")
     return best_method
 
-
-
-#--------------------------* MAIN ENTRYPOINT *-----------------------------------------
-
+# ------------------------* MAIN ENTRYPOINT *-------------------------------
 
 def process_csv(input_path: str, output_path: str) -> None:
-    """
-    Pipeline to read CSV, apply strategies, evaluate, and save best-cleaned version.
-    """
     if not os.path.exists(input_path):
         logging.error(f"Input file not found: {input_path}")
         return
@@ -118,6 +98,11 @@ def process_csv(input_path: str, output_path: str) -> None:
     logging.info(f"Input CSV loaded: {input_path}")
     logging.info(f"Initial Shape: {df.shape}, Null Count: {df.isnull().sum().sum()}")
 
+    log_lines = []
+    log_lines.append(f"Processing file: {input_path}")
+    log_lines.append(f"Initial shape: {df.shape}")
+    log_lines.append(f"Total null values: {df.isnull().sum().sum()}\n")
+
     strategies: Dict[str, Callable[[pd.DataFrame], pd.DataFrame]] = {
         "drop_nulls": drop_nulls,
         "replace_with_fixed": lambda d: replace_with_fixed(d, 0),
@@ -130,7 +115,7 @@ def process_csv(input_path: str, output_path: str) -> None:
 
     cleaned_versions = {name: func(df.copy()) for name, func in strategies.items()}
 
-    best_method = evaluate_methods(df, cleaned_versions)
+    best_method = evaluate_methods(df, cleaned_versions, log_lines)
     best_df = cleaned_versions[best_method]
 
     logging.info(f"Best strategy selected: {best_method}")
@@ -138,5 +123,10 @@ def process_csv(input_path: str, output_path: str) -> None:
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     best_df.to_csv(output_path, index=False)
-
     logging.info(f"Cleaned CSV saved at: {output_path}")
+
+    # Save log file
+    log_file_path = os.path.join(os.path.dirname(output_path), "null_handling_log.txt")
+    with open(log_file_path, "w") as f:
+        f.write("\n".join(log_lines))
+    logging.info(f"Decision-making log saved at: {log_file_path}")
