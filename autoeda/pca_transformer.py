@@ -36,6 +36,7 @@ def apply_pca( df, n_components = None):
 if __name__ == "__main__":
     INPUT_FILE = "./backend/output/autoEDA_outliers_removed.csv"
     OUTPUT_FILE = "./backend/output/pca_transformed.csv"
+    OUTPUT_LOG_FILE = "./backend/output/pca_transformed_log.csv"
 
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
 
@@ -43,6 +44,7 @@ if __name__ == "__main__":
     transformed_df, meta = apply_pca(df)
 
     transformed_df.to_csv(OUTPUT_FILE, index=False)
+    pd.DataFrame([meta]).to_csv(OUTPUT_LOG_FILE, index=False)
 
     print("PCA transformation completed.")
     print("Explained Variance Ratio:", meta["explained_variance_ratio"])

@@ -1,0 +1,2 @@
+explained_variance_ratio,n_components,original_columns,pca_columns
+"[0.4498603234850657, 0.2825187840377393, 0.14742664383310602, 0.10147484344749708, 0.01871940519659176, 0.0]",6,"['PassengerId', 'Pclass', 'Age', 'SibSp', 'Parch', 'Fare']","['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6']"
