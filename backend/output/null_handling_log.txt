@@ -1,0 +1,47 @@
+Processing file: notebooks/sample_csv/titanic.csv
+Initial shape: (891, 12)
+Total null values: 866
+
+Method tried: drop_nulls
+ - Nulls removed: 866
+ - Remaining nulls: 0
+ - Shape after cleaning: (183, 12)
+ - Strategy score: 0.8013
+
+Method tried: replace_with_fixed
+ - Nulls removed: 866
+ - Remaining nulls: 0
+ - Shape after cleaning: (891, 12)
+ - Strategy score: 1.0000
+
+Method tried: replace_with_mean
+ - Nulls removed: 177
+ - Remaining nulls: 689
+ - Shape after cleaning: (891, 12)
+ - Strategy score: 0.6022
+
+Method tried: replace_with_median
+ - Nulls removed: 177
+ - Remaining nulls: 689
+ - Shape after cleaning: (891, 12)
+ - Strategy score: 0.6022
+
+Method tried: replace_with_mode
+ - Nulls removed: 866
+ - Remaining nulls: 0
+ - Shape after cleaning: (891, 12)
+ - Strategy score: 1.0000
+
+Method tried: forward_fill
+ - Nulls removed: 865
+ - Remaining nulls: 1
+ - Shape after cleaning: (891, 12)
+ - Strategy score: 0.9994
+
+Method tried: backward_fill
+ - Nulls removed: 865
+ - Remaining nulls: 1
+ - Shape after cleaning: (891, 12)
+ - Strategy score: 0.9994
+
+✅ Best strategy selected: replace_with_fixed
