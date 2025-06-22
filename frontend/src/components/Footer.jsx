@@ -3,6 +3,7 @@ import { Mail, ArrowUp, ExternalLink } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { Linkedin } from 'lucide-react';
 import loggd from './Autd.svg';
+import rockt from './itop.svg';
 
 const Footer = () => {
     const [showScrollTop, setShowScrollTop] = useState(false);
@@ -207,10 +208,15 @@ const Footer = () => {
             {showScrollTop && (
                 <button
                     onClick={scrollToTop}
-                    className="fixed bottom-8 right-8 p-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl shadow-2xl shadow-purple-500/25 hover:shadow-purple-500/50 hover:scale-110 transition-all duration-300 z-50 group"
-                >
-                    <ArrowUp className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                    className="fixed bottom-8 right-8 p-4 hover:shadow-purple-500/50 hover:scale-110 transition-all duration-300 z-50 group"
+                    >
+                    <img
+                        src={rockt}
+                        alt="Scroll to top"
+                        className="w-12 h-12 group-hover:scale-110 transition-transform duration-300"
+                    />
                 </button>
+
             )}
 
         </footer>
