@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 import pandas as pd
 from flask_cors import CORS
 import chardet
@@ -10,6 +10,9 @@ from dotenv import load_dotenv
 from datetime import timedelta
 import uuid
 import os 
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from autoeda.summary_stats import summarize_csv
 
 load_dotenv()
 
@@ -36,6 +39,7 @@ CORS(app, resources={
     r"/signup": {"origins": ALLOWED_ORIGINS},
     r"/me": {"origins": ALLOWED_ORIGINS},
     r"/contact": {"origins": ALLOWED_ORIGINS}, 
+    r"/upload_csv": {"origins": ALLOWED_ORIGINS},
 }, supports_credentials=True)
 
 
@@ -197,6 +201,31 @@ def get_user_profile():
 @app.route('/')
 def home():
     return "Welcome to the AutoEDA Backend API!"
+
+@app.route('/upload_csv', methods=['POST'])
+def upload_file_csv():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file uploaded'}), 400
+    file = request.files['file']
+    filename = file.filename
+    if not filename.lower().endswith(".csv"):
+        return jsonify({'status':"error",'error': "Only CSV files can be uploaded"}), 400
+    raw_data = file.read()
+    result = chardet.detect(raw_data)
+    encoding = result.get('encoding')#result['encoding']
+
+    file.seek(0)
+
+    try:
+        stats = summarize_csv(file, encoding=encoding, export_json=False)
+        
+        return jsonify({
+            "status": "success",
+            "filename": filename,
+            "summary": stats
+        }), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/upload', methods=['POST'])
 def upload_file():

@@ -9,14 +9,42 @@ import {
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { UploadCloud } from 'lucide-react';
+import ScrollableCard from './scrollCard';
+import axios from 'axios';
 
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [summary, setSummary] = useState(null);
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedFile(e.target.files[0]);
     }
+  };
+
+  const showSummary = () => {
+    if (!selectedFile) {
+      alert("Please select a file first.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    axios
+      .post("http://127.0.0.1:5000/upload_csv", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log("File uploaded successfully:", response.data);
+        setSummary(response.data); // set the returned summary json
+      })
+      .catch((error) => {
+        console.error("Error uploading file:", error);
+        alert("Error uploading file: " + (error.response?.data?.error || error.message));
+      });
   };
 
   const handleSubmit = (e) => {
@@ -25,13 +53,13 @@ const FileUpload = () => {
       alert("Please select a file first.");
       return;
     }
-
     console.log("Uploading file:", selectedFile.name);
-    alert(`File "${selectedFile.name}" uploaded successfully!`);
+    showSummary();
   };
 
   const handleCancel = () => {
     setSelectedFile(null);
+    setSummary(null);
   };
 
   return (
@@ -99,6 +127,13 @@ const FileUpload = () => {
             </div>
           </form>
         </CardContent>
+
+        {summary && 
+          <div className="w-full h-60 border border-[#ccc] rounded-lg shadow-md overflow-y-auto p-4 bg-card dark:text-blue-200 text-blue-950">
+            <ScrollableCard data={summary || { message: "No summary available yet." }} />
+          </div>
+        }
+
       </Card>
     </div>
   );
