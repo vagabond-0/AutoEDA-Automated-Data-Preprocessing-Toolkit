@@ -6,18 +6,18 @@ import json
 import os
 from pathlib import Path
 
-def process_scaling(df: pd.DataFrame, output_dir: str) -> None:
+def process_scaling(df: pd.DataFrame, output_dir: str = "../backend/output") -> None:
     """
     Processes scaling for numeric columns in the DataFrame, selects best scaler per column based on skewness,
-    applies the scaling, and saves the scaled data and a report.
-
+    applies the scaling, and saves the scaled data and a report to backend/output.
+    
     Args:
         df: Input DataFrame with data to scale.
-        output_dir: Directory to save output files.
+        output_dir: Output directory path (default: ./backend/output).
     """
     # Create output directory if it doesn't exist
     Path(output_dir).mkdir(parents=True, exist_ok=True)
-
+    
     # Identify numeric columns
     numeric_cols = df.select_dtypes(include=np.number).columns.tolist()
     
@@ -71,14 +71,21 @@ def process_scaling(df: pd.DataFrame, output_dir: str) -> None:
         scaled_df[col] = full_col
         scaler_report[col] = best_scaler_name
     
-    # Save scaled data
+    # Save scaled data to backend/output
     scaled_path = os.path.join(output_dir, "autoEDA_scaled_output.csv")
     scaled_df.to_csv(scaled_path, index=False)
     
-    # Save scaler report
+    # Save scaler report to backend/output
     report_path = os.path.join(output_dir, "scaling_report.json")
     with open(report_path, 'w') as f:
         json.dump(scaler_report, f, indent=4)
     
     print(f"✅ Scaled data saved to: {scaled_path}")
     print(f"📋 Scaler report saved to: {report_path}")
+    
+if __name__ == "__main__":
+    # Load your file
+    df = pd.read_csv("laptopData.csv")
+    
+    process_scaling(df)
+
