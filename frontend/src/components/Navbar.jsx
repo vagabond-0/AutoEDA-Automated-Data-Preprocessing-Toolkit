@@ -1,17 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 import { useNavigate } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Button } from './ui/button';
 import { useAuth0 } from "@auth0/auth0-react";
+import { useTheme } from './theme-provider'; // ✅ import Theme context
 import logg from './Aut.svg';
 import loggd from './Autd.svg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
-  const {user, loginWithRedirect, isAuthenticated, logout} = useAuth0();
+  const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
+  const { theme, setTheme } = useTheme(); // ✅ use theme from context
 
   const navItems = [
     { name: 'About Us', to: 'about' },
@@ -23,27 +24,10 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const toggleDarkMode = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    if (newMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    setTheme(theme === 'dark' ? 'light' : 'dark'); // ✅ update global theme
   };
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setDarkMode(true);
-      document.documentElement.classList.add('dark');
-    } else {
-      setDarkMode(false);
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md">
@@ -51,14 +35,9 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
-            {/* Light mode logo */}
             <img src={logg} alt="AutoEDA Logo" className="h-8 w-auto block dark:hidden" />
-
-            {/* Dark mode logo */}
             <img src={loggd} alt="AutoEDA Logo" className="h-8 w-auto hidden dark:block" />
           </div>
-
-
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
@@ -83,19 +62,14 @@ const Navbar = () => {
                 onClick={toggleDarkMode}
                 className="rounded-full p-2"
               >
-                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </Button>
 
               {/* Login / Signup */}
               {isAuthenticated ? (
-                <Button
-                onClick={() => logout()}
-                >Logout</Button>
+                <Button onClick={() => logout()}>Logout</Button>
               ) : (
-                <Button
-                  onClick={() => navigate('/auth')}
-                  variant="default"
-                >
+                <Button onClick={() => navigate('/auth')} variant="default">
                   Login / Signup
                 </Button>
               )}
@@ -110,11 +84,7 @@ const Navbar = () => {
               onClick={toggleMenu}
               className="inline-flex items-center justify-center"
             >
-              {isOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
@@ -148,7 +118,7 @@ const Navbar = () => {
               }}
               className="w-full flex justify-start space-x-2"
             >
-              {darkMode ? (
+              {isDark ? (
                 <>
                   <Sun className="h-5 w-5" />
                   <span>Light Mode</span>
