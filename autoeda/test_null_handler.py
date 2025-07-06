@@ -1,13 +1,10 @@
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import pytest
 import pandas as pd
 import numpy as np
 import tempfile
+import os
 from pandas import testing as tm
-from autoeda import null_handler
+from autoeda import null_handler 
 # Assuming autoeda is in PYTHONPATH or installed
 # If autoeda is a local directory and not installed, Python might not find it
 # without adjusting sys.path. For now, let's assume it's discoverable.
@@ -355,7 +352,7 @@ def test_replace_with_median_all_null_numeric_column(all_null_column_df):
     assert cleaned_df['num_col_all_null'].isnull().all() # Median is NaN, so no change
     assert cleaned_df['cat_col_all_null'].isnull().all() # Not affected
     assert cleaned_df.loc[0,'mixed_col'] == 1
-    assert pd.isna(cleaned_df.loc[1,'mixed_col']) # This was NaN, part of an object column, not touched
+    assert pd.isna(cleaned_df.loc[1,'mixed_col'])
     assert cleaned_df.loc[2,'mixed_col'] == 'a'
     assert cleaned_df.shape == all_null_column_df.shape
 
