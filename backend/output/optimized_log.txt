@@ -1,0 +1,46 @@
+2025-06-21 13:29:52,637 - INFO - Starting CSV optimization for backend/output\null_value_removed.csv...
+2025-06-21 13:29:52,649 - INFO - Successfully read CSV from backend/output\null_value_removed.csv.
+2025-06-21 13:29:52,652 - INFO - Original DataFrame memory usage: 0.01 MB
+2025-06-21 13:29:52,652 - INFO - Starting data type optimization.
+2025-06-21 13:29:52,654 - INFO - Column 'ItemID': Downcast to int32 or smaller (e.g., int16, int8).
+2025-06-21 13:29:52,654 - INFO - Column 'ItemID': Memory usage changed from 732 to 207 bytes.
+2025-06-21 13:29:52,658 - INFO - Column 'Category': Converted to category. Unique values: 5.
+2025-06-21 13:29:52,659 - INFO - Column 'Category': Memory usage changed from 4429 to 664 bytes.
+2025-06-21 13:29:52,660 - INFO - Column 'Price': Downcast to float32 (or smaller if possible via to_numeric).
+2025-06-21 13:29:52,660 - INFO - Column 'Price': Memory usage changed from 732 to 432 bytes.
+2025-06-21 13:29:52,660 - INFO - Column 'StockQuantity': Downcast to int32 or smaller (e.g., int16, int8).
+2025-06-21 13:29:52,660 - INFO - Column 'StockQuantity': Memory usage changed from 732 to 282 bytes.
+2025-06-21 13:29:52,665 - WARNING - Column 'LastSoldDate': Could not convert to datetime using infer_datetime_format. Error: time data "01/15/2024" doesn't match format "%Y-%m-%d", at position 14. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2025-06-21 13:29:52,665 - INFO - Column 'VendorID': Converted to category. Unique values: 4.
+2025-06-21 13:29:52,666 - INFO - Column 'VendorID': Memory usage changed from 4107 to 591 bytes.
+2025-06-21 13:29:52,666 - INFO - Column 'Rating': Downcast to float32 (or smaller if possible via to_numeric).
+2025-06-21 13:29:52,666 - INFO - Column 'Rating': Memory usage changed from 732 to 432 bytes.
+2025-06-21 13:29:52,666 - INFO - Data type optimization finished.
+2025-06-21 13:29:52,666 - INFO - Optimized DataFrame memory usage: 0.01 MB
+2025-06-21 13:29:52,670 - INFO - Successfully saved optimized CSV to backend/output\data_optimized.csv.
+2025-06-21 13:30:09,924 - INFO - Starting CSV optimization for backend/output\null_value_removed.csv...
+2025-06-21 13:30:09,927 - INFO - Successfully read CSV from backend/output\null_value_removed.csv.
+2025-06-21 13:30:09,928 - INFO - Original DataFrame memory usage: 0.01 MB
+2025-06-21 13:30:09,928 - INFO - Starting data type optimization.
+2025-06-21 13:30:09,928 - INFO - Column 'ItemID': Downcast to int32 or smaller (e.g., int16, int8).
+2025-06-21 13:30:09,928 - INFO - Column 'ItemID': Memory usage changed from 732 to 207 bytes.
+2025-06-21 13:30:09,929 - INFO - Column 'Category': Converted to category. Unique values: 5.
+2025-06-21 13:30:09,929 - INFO - Column 'Category': Memory usage changed from 4429 to 664 bytes.
+2025-06-21 13:30:09,930 - INFO - Column 'Price': Downcast to float32 (or smaller if possible via to_numeric).
+2025-06-21 13:30:09,930 - INFO - Column 'Price': Memory usage changed from 732 to 432 bytes.
+2025-06-21 13:30:09,930 - INFO - Column 'StockQuantity': Downcast to int32 or smaller (e.g., int16, int8).
+2025-06-21 13:30:09,930 - INFO - Column 'StockQuantity': Memory usage changed from 732 to 282 bytes.
+2025-06-21 13:30:09,931 - WARNING - Column 'LastSoldDate': Could not convert to datetime using infer_datetime_format. Error: time data "01/15/2024" doesn't match format "%Y-%m-%d", at position 14. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2025-06-21 13:30:09,932 - INFO - Column 'VendorID': Converted to category. Unique values: 4.
+2025-06-21 13:30:09,932 - INFO - Column 'VendorID': Memory usage changed from 4107 to 591 bytes.
+2025-06-21 13:30:09,932 - INFO - Column 'Rating': Downcast to float32 (or smaller if possible via to_numeric).
+2025-06-21 13:30:09,932 - INFO - Column 'Rating': Memory usage changed from 732 to 432 bytes.
+2025-06-21 13:30:09,933 - INFO - Data type optimization finished.
+2025-06-21 13:30:09,933 - INFO - Optimized DataFrame memory usage: 0.01 MB
+2025-06-21 13:30:09,936 - INFO - Successfully saved optimized CSV to backend/output\data_optimized.csv.

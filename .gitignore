@@ -12,8 +12,8 @@ dist
 dist-ssr
 *.local
 frontend/node_modules/
-
-
+.venv
+_pycache_
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -24,3 +24,5 @@ frontend/node_modules/
 *.njsproj
 *.sln
 *.sw?
+
+venv/

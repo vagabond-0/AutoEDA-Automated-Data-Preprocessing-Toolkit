@@ -1,0 +1,21 @@
+id,name,category,value,large_number,possible_date,another_number,text_data,float_data
+1,Alice,Type A,10.5,1000000,2023-01-15,25,Hello World,0.12345679
+2,Bob,Type B,22.1,2500000,2023-02-20,30,TestData,1.9876543
+3,Charlie,Type A,15.0,1200000,2023-03-25,22,Sample Text,2.345
+4,David,Type C,8.75,3000000,2023-04-10T10:20:30,45,More Data,3.14159
+5,Eve,Type B,19.2,1800000,2023-05-05,28,Testing 123,7e-07
+6,Frank,Type A,10.5,1000000,2023-01-15,25,Hello World,0.12345679
+7,Grace,Type D,22.1,2500000,2023-02-20,30,TestData,1.9876543
+8,Heidi,Type A,15.0,1200000,NotADate,22,Sample Text,2.345
+9,Ivan,Type C,8.75,3000000,2023-04-10,45,More Data,3.14159
+10,Judy,Type B,19.2,1800000,2023-05-05,28,Testing 123,7e-07
+11,Mallory,Type E,5.5,500000,2024-07-20,10,Yet another,5.555
+12,Niaj,Type F,6.3,600000,2024-08-15,12,Row here,6.666
+13,Olivia,Type A,7.1,700000,2024-09-10,14,And another,7.777
+14,Peggy,Type B,8.9,800000,2024-10-05,16,One more,8.888
+15,Quentin,Type C,9.7,900000,2024-11-30,18,Almost done,9.999
+16,Romeo,Type A,10.5,1000000,2023-01-15,25,Hello World,0.12345679
+17,Sybil,Type B,22.1,2500000,2023-02-20,30,TestData,1.9876543
+18,Trent,Type A,15.0,1200000,2023-03-25,22,Sample Text,2.345
+19,Ula,Type C,8.75,3000000,2023-04-10,45,More Data,3.14159
+20,Victor,Type B,19.2,1800000,2023-05-05,28,Last one,7e-07

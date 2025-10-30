@@ -1,42 +1,155 @@
-# AutoEDA - Automated Data Preprocessing Toolkit
+<div align="center">
 
-## Overview
-AutoEDA is an open-source project designed to automate the data preprocessing workflow, making it easier for data scientists and analysts to prepare their datasets for exploratory data analysis (EDA) and machine learning model building. This toolkit aims to eliminate null values, prepare clean datasets, perform feature engineering, and optimize preprocessing strategies for seamless integration with various machine learning models.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./frontend/src/components/Autd.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="./frontend/src/components/Aut.svg" />
+  <img src="path/to/light-logo.png" alt="Project Logo" width="250" />
+</picture>
 
-## Contribution Guidelines
-We welcome contributions from the community! Below are the areas where you can contribute:
+</div>
 
-### Frontend
-1. **Enhancing the Frontend**: Improve the user interface and user experience of the application using modern frontend frameworks and libraries.
-2. **Adding Necessary Pages**: Implement additional pages like a feedback form or documentation section to enhance user interaction and gather input.
+---
 
-### Model Building- The heart of AutoEDA  
-Contributors can assist in the following areas:
+# ⚡ AutoEDA - Automated Data Preprocessing Toolkit
 
-1. **Data Loading**: Implement efficient methods to read and store CSV files.
-2. **Data Cleaning**: Develop algorithms for handling null values, removing duplicates, and correcting data types.
-3. **Feature Engineering**: Introduce techniques to create new features from existing data for improved model performance.
-4. **Model Training**: Experiment with various machine learning algorithms to optimize preprocessing strategies.
+![GitHub repo size](https://img.shields.io/github/repo-size/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit?color=brightgreen)
+![GitHub contributors](https://img.shields.io/github/contributors/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit)
+![GitHub last commit](https://img.shields.io/github/last-commit/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit)
+![Issues](https://img.shields.io/github/issues/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit)
+![License](https://img.shields.io/github/license/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit)
+![GitHub Stars](https://img.shields.io/github/stars/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit?style=flat-square)
 
-### Backend
-1. **Building Functions for Data Processing**: Develop different functions that support data cleaning, filtering, and preprocessing procedures.
-2. **Creating APIs**: Build APIs for the machine learning model to handle data uploads and downloads efficiently.
-3. **Integration**: Ensure seamless integration between the frontend and backend components.
-4. **Dockerization**: Dockerize the application to streamline deployment and ensure consistent environments.
+> ⚡ Automate tedious data cleaning — focus more on insights, not pipelines.
 
-### Workflow
-![alt text](<Screenshot 2024-10-01 152746.png>)
+---
 
-## Requirements
-- React.JS + Vite (for frontend)
-- Python 3.x (for backend + model building)
-- Docker (for containerization)
+## 📌 Table of Contents
 
-Make sure to run the .gitignore file.
+* [🔍 Overview](#-overview)
+* [✨ Key Features](#-key-features)
+* [🧱 Project Architecture](#-project-architecture)
+* [📦 Requirements](#-requirements)
+* [🚀 Getting Started](#-getting-started)
+* [🤝 How to Contribute](#-how-to-contribute)
+* [🛡 License](#-license)
+* [📬 Contact](#-contact)
 
-## Getting Started
-To clone the repository, run the following command:
+## 🔍 Overview
 
+AutoEDA is a lightweight yet powerful toolkit that streamlines data preprocessing for Exploratory Data Analysis (EDA) and Machine Learning.
+
+It automates routine cleaning tasks such as missing value treatment, type correction, and feature engineering, helping data scientists and analysts unlock insights faster and with less friction.
+
+## ✨ Key Features
+
+* ✅ Seamless CSV upload & schema validation
+* ✅ Null value imputation & type inference
+* ✅ Smart duplicate detection & cleanup
+* ✅ Feature extraction and transformation
+* ✅ REST API support for integration
+* ✅ Modern React + Vite frontend
+* ✅ Dockerized deployment for easy setup
+
+## 🧱 Project Architecture
+
+### 🧠 Backend (Python)
+
+* Modular design for cleaning, transforming, and preprocessing datasets
+* Built with FastAPI for high-speed async REST APIs
+* Easily extendable for custom ML workflows
+
+### 🎨 Frontend (React + Vite)
+
+* Sleek UI for uploading, previewing, and processing datasets
+* Designed for responsiveness and ease-of-use
+* Optional sections for documentation, help, and dataset history
+
+### 🐳 Docker Support
+
+* Docker & Docker Compose configuration for cross-platform deployment
+* One command to launch the full app stack
+
+## 📦 Requirements
+
+* 🧑‍💻 Frontend: React.js, Vite
+* 🐍 Backend: Python 3.x, FastAPI, Pandas
+* 🐳 Containerization: Docker & Docker Compose
+
+> ⚠️ Remember to configure your `.gitignore` and environment variables!
+
+## 🚀 Getting Started
+
+1️⃣ **Clone the repository**
+
+```bash
 git clone https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit
+cd AutoEDA-Automated-Data-Preprocessing-Toolkit
+```
 
-Once cloned, follow the instructions in the respective frontend and backend directories for setup and running the application.
+2️⃣ **Run the backend**
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+3️⃣ **Launch the frontend**
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+4️⃣ **\[Optional] Run everything with Docker**
+
+```bash
+docker-compose up --build
+```
+
+## 🤝 How to Contribute
+
+We 💖 community contributions! Here’s how you can make an impact:
+
+### 🔧 Frontend
+
+*
+
+### 🧪 Model Pipeline
+
+*
+
+### ⚙️ Backend
+
+*
+
+📢 New to open source? Start here: [`CONTRIBUTING.md`](CONTRIBUTING.md)
+
+✨ Looking for ideas? Explore [Good First Issues](https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit/labels/good%20first%20issue)
+
+## 🛡 License
+
+This project uses a **Modified MIT License**.
+
+🔒 **Please read the ****`LICENSE`**** file** carefully before using or contributing.
+
+## 📬 Contact
+
+We'd love to hear from you!
+
+* 🗨 [Open an issue](https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit/issues/new)
+* 🔁 [Submit a pull request](https://github.com/Nidhi-Satyapriya/AutoEDA-Automated-Data-Preprocessing-Toolkit/pulls)
+* ⭐ Star the repo if you find it helpful
+
+> Built with ❤️ by passionate developers — for the community, by the community.
+
+## ✨ If you found this project useful...
+
+Please consider ⭐ starring the repository and sharing it with your team or on social media.
+
+---
+
+> "Keep pushing boundaries — even small steps can lead to powerful transformations. 🌱"
+
+> "Believe in the process, trust your curiosity, and let every dataset take you one step closer to mastery. 💡📊"

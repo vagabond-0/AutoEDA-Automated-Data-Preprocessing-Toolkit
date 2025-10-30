@@ -1,0 +1,49 @@
+2025-06-22 03:15:14,085 - init_setup - INFO - FileHandler configured for c:\Users\SOHAM\Desktop\AutoEDA-Automated-Data-Preprocessing-Toolkit\backend\output\data_optimization_run.txt. Stream: <_io.TextIOWrapper name='c:\\Users\\SOHAM\\Desktop\\AutoEDA-Automated-Data-Preprocessing-Toolkit\\backend\\output\\data_optimization_run.txt' mode='a' encoding='cp1252'>
+2025-06-22 03:15:14,085 - __main__ - INFO - Script started. Input CSV: c:\Users\SOHAM\Desktop\AutoEDA-Automated-Data-Preprocessing-Toolkit\backend\output\sample_input_for_optimization.csv, Output CSV: c:\Users\SOHAM\Desktop\AutoEDA-Automated-Data-Preprocessing-Toolkit\backend\output\optimized_sample_output.csv, Log File: c:\Users\SOHAM\Desktop\AutoEDA-Automated-Data-Preprocessing-Toolkit\backend\output\data_optimization_run.txt
+2025-06-22 03:15:14,086 - __main__ - INFO - Loading data from c:\Users\SOHAM\Desktop\AutoEDA-Automated-Data-Preprocessing-Toolkit\backend\output\sample_input_for_optimization.csv
+2025-06-22 03:15:14,097 - __main__ - INFO - Data loaded successfully.
+2025-06-22 03:15:14,102 - __main__ - INFO - Original memory usage: 5474 bytes
+2025-06-22 03:15:14,102 - __main__ - INFO - Original dtypes:
+id                  int64
+name               object
+category           object
+value             float64
+large_number        int64
+possible_date      object
+another_number      int64
+text_data          object
+float_data        float64
+dtype: object
+2025-06-22 03:15:14,104 - __main__ - INFO - Optimizing data...
+2025-06-22 03:15:14,104 - autoeda.notebook_data_optimization - INFO - Starting data type optimization.
+2025-06-22 03:15:14,104 - autoeda.notebook_data_optimization - INFO - Attempting to convert column 'possible_date' to datetime objects.
+2025-06-22 03:15:14,108 - autoeda.notebook_data_optimization - WARNING - Could not convert column 'possible_date' to datetime: unconverted data remains when parsing with format "%Y-%m-%d": "T10:20:30", at position 3. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.. It will remain an object type.
+2025-06-22 03:15:14,111 - autoeda.notebook_data_optimization - INFO - Converting column 'name' to category type.
+2025-06-22 03:15:14,114 - autoeda.notebook_data_optimization - INFO - Converting column 'category' to category type.
+2025-06-22 03:15:14,116 - autoeda.notebook_data_optimization - INFO - Converting column 'text_data' to category type.
+2025-06-22 03:15:14,117 - autoeda.notebook_data_optimization - INFO - Downcasting float column 'value'.
+2025-06-22 03:15:14,119 - autoeda.notebook_data_optimization - INFO - Downcasting float column 'float_data'.
+2025-06-22 03:15:14,119 - autoeda.notebook_data_optimization - INFO - Downcasting integer column 'id'.
+2025-06-22 03:15:14,120 - autoeda.notebook_data_optimization - INFO - Downcasting integer column 'large_number'.
+2025-06-22 03:15:14,120 - autoeda.notebook_data_optimization - INFO - Downcasting integer column 'another_number'.
+2025-06-22 03:15:14,121 - autoeda.notebook_data_optimization - INFO - Data type optimization complete.
+2025-06-22 03:15:14,121 - __main__ - INFO - Data optimization complete.
+2025-06-22 03:15:14,122 - __main__ - INFO - Optimized memory usage: 4742 bytes
+2025-06-22 03:15:14,122 - __main__ - INFO - Optimized dtypes:
+id                    int8
+name              category
+category          category
+value              float32
+large_number         int32
+possible_date       object
+another_number        int8
+text_data         category
+float_data         float32
+dtype: object
+2025-06-22 03:15:14,123 - __main__ - INFO - Saving optimized data to c:\Users\SOHAM\Desktop\AutoEDA-Automated-Data-Preprocessing-Toolkit\backend\output\optimized_sample_output.csv
+2025-06-22 03:15:14,127 - __main__ - INFO - Optimized data saved successfully.
+2025-06-22 03:15:14,127 - __main__ - INFO - Script finished.
+2025-06-22 03:15:14,128 - __main__ - INFO - Closing log file handler for c:\Users\SOHAM\Desktop\AutoEDA-Automated-Data-Preprocessing-Toolkit\backend\output\data_optimization_run.txt
